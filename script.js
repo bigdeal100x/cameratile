@@ -84,7 +84,7 @@ const video = document.getElementById('preview');
 
     function startLoop() {
     clearInterval(timer);
-    timer = setInterval(() => { if (lookingAway) snap(); }, 1000);
+    timer = setInterval(() => { if (lookingAway) snap(); }, 100);
   }
 
   function stopLoop() {
