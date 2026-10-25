@@ -1,0 +1,156 @@
+:root {
+    --bg: #e8e8e8;
+    --fg: #0b0b0b;
+    --dim: #6b6b6b;
+    --accent: #ff3b30;
+    --cols: 12;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Courier New", ui-monospace, monospace;
+    font-size: 12px;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid #222;
+    backdrop-filter: blur(6px);
+}
+
+#preview {
+    width: 120px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transform: scaleX(-1);
+    border: 1px solid #333;
+    background: #111;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 150px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--dim);
+}
+
+.dot.live {
+    background: var(--accent);
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.2;
+    }
+}
+
+button,
+select {
+    font: inherit;
+    color: var(--fg);
+    background: var(--bg);
+    border: 1px solid #333;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+button:hover,
+select:hover {
+    border-color: var(--fg);
+}
+
+button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+label {
+    color: var(--dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: 2px;
+    padding: 2px;
+}
+
+.frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: #111;
+    overflow: hidden;
+}
+
+.frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    animation: develop 0.6s ease-out;
+}
+
+@keyframes develop {
+    from {
+        opacity: 0;
+        filter: brightness(3);
+    }
+
+    to {
+        opacity: 1;
+        filter: none;
+    }
+}
+
+.frame span {
+    position: absolute;
+    left: 3px;
+    bottom: 2px;
+    font-size: 9px;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+    opacity: 0.8;
+}
+
+#empty {
+    padding: 40px 16px;
+    color: var(--dim);
+}
+#peers {
+    color: var(--dim);
+}
+
+#notice {
+    padding: 8px 16px;
+    color: var(--dim);
+    border-bottom: 1px solid #222;
+}

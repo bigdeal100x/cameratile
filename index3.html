@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>camera tile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+</head>
+<body>
+        <header>
+  <video id="preview" autoplay playsinline muted></video>
+  <div class="status"><div class="dot" id="dot"></div><span id="count">0 frames</span></div>
+    <span id="gaze">loading model…</span>
+    <select id="cols">
+      <option value="6">6</option>
+      <option value="8">8</option>
+      <option value="12" selected>12</option>
+      <option value="16">16</option>
+    </select>
+  </label>
+  <button id="saveBtn" disabled>Save sheet</button>
+  <button id="clearBtn">Clear</button>
+  <button id="resetBtn">Reset camera</button>
+</header>
+
+<div id="grid"></div>
+<p id="empty">Waiting for camera… allow access when your browser asks.</p>
+
+<canvas id="cap" hidden></canvas>
+</body>
+<script src="script.js"></script>
+</html>
