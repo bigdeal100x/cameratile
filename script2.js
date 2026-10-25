@@ -14,7 +14,6 @@ const gazeEl = document.getElementById('gaze');
 const peersEl = document.getElementById('peers');
 const countEl = document.getElementById('count');
 const emptyEl = document.getElementById('empty');
-const colsSel = document.getElementById('cols');
 const saveBtn = document.getElementById('saveBtn');
 const clearBtn = document.getElementById('clearBtn');
 const resetBtn = document.getElementById('resetBtn');
@@ -85,7 +84,7 @@ async function detect() {
   if (model && video.readyState >= 2) {
     const faces = await model.estimateFaces(video, false);
     if (faces.length === 0) {
-      lookingAway = true;
+      lookingAway = false;
     } else {
       const [rEye, lEye, nose] = faces[0].landmarks;
       const eyeMidX = (rEye[0] + lEye[0]) / 2;
@@ -93,7 +92,9 @@ async function detect() {
       const yaw = (nose[0] - eyeMidX) / eyeDist;
       lookingAway = Math.abs(yaw) > YAW_LIMIT;
     }
-    gazeEl.textContent = lookingAway ? 'NOT LOOKING — being watched' : 'LOOKING — spectating';
+        gazeEl.textContent = faces.length === 0 ? 'NO FACE'
+      : lookingAway ? 'NOT LOOKING — being watched'
+      : 'LOOKING — spectating';
     dot.classList.toggle('live', lookingAway);
   }
   requestAnimationFrame(detect);
@@ -148,9 +149,7 @@ function addFrame(data, peerId) {
 
   const cell = document.createElement('div');
   cell.className = 'frame';
-  const tag = document.createElement('span');
-  tag.textContent = peer;
-  cell.append(img, tag);
+  cell.appendChild(img);
   grid.appendChild(cell);
 
   // Drop the oldest frames so memory stays bounded
@@ -176,7 +175,7 @@ function clearAll() {
 // Export everything you've watched as one contact-sheet PNG
 function saveSheet() {
   if (!frames.length) return;
-  const cols = Number(colsSel.value);
+  const cols = 12;
   const rows = Math.ceil(frames.length / cols);
   const gap = 2;
   const sheet = document.createElement('canvas');
@@ -213,7 +212,7 @@ function stopLoop() {
 async function run() {
   try {
     await startCamera();
-    emptyEl.textContent = 'No one else here yet. Frames appear when someone in your room looks away.';
+    emptyEl.style.display = 'none';
     if (!model) {
       gazeEl.textContent = 'loading model…';
       model = await blazeface.load();
@@ -248,9 +247,6 @@ async function resetCamera() {
 clearBtn.addEventListener('click', clearAll);
 saveBtn.addEventListener('click', saveSheet);
 resetBtn.addEventListener('click', resetCamera);
-colsSel.addEventListener('change', () => {
-  document.documentElement.style.setProperty('--cols', colsSel.value);
-});
 
 connect().catch(err => { peersEl.textContent = 'room error: ' + err.message; });
 run();

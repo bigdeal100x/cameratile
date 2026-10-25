@@ -131,26 +131,10 @@ label {
     }
 }
 
-.frame span {
-    position: absolute;
-    left: 3px;
-    bottom: 2px;
-    font-size: 9px;
-    color: #fff;
-    text-shadow: 0 0 3px #000;
-    opacity: 0.8;
-}
-
 #empty {
     padding: 40px 16px;
     color: var(--dim);
 }
 #peers {
     color: var(--dim);
-}
-
-#notice {
-    padding: 8px 16px;
-    color: var(--dim);
-    border-bottom: 1px solid #222;
 }
