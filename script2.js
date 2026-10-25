@@ -21,10 +21,10 @@ const resetBtn = document.getElementById('resetBtn');
 // ---------- settings ----------
 const APP_ID = 'cameratile-bigdeal100x';  // keeps this piece's rooms separate from other Trystero apps
 const FRAME_W = 320, FRAME_H = 240;       // size of each snap (4:3)
-const SNAP_MS = 100;                      // ~10 frames per second while looking away
+const SNAP_MS = 50;                      // ~10 frames per second while looking away
 const JPEG_QUALITY = 0.6;
 const MAX_FRAMES = 600;                   // oldest frames drop off after this
-const YAW_LIMIT = 0.25;                   // lower = more sensitive to turning away
+const YAW_LIMIT = 0.35;                   // lower = more sensitive to turning away
 
 // Optional TURN relay for networks that block device-to-device traffic.
 // Leave empty to use the defaults (STUN only).

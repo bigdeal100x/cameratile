@@ -1,5 +1,5 @@
 :root {
-    --bg: #e8e8e8;
+    --bg: #ffffff;
     --fg: #0b0b0b;
     --dim: #6b6b6b;
     --accent: #ff3b30;
@@ -137,4 +137,22 @@ label {
 }
 #peers {
     color: var(--dim);
+}
+
+/* hide everything in the header except Reset camera */
+header .status,
+#peers,
+#count,
+#saveBtn,
+#clearBtn {
+    display: none;
+}
+
+/* keep the camera running for face detection, just invisible */
+#preview {
+    position: fixed;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
 }
