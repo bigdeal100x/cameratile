@@ -156,3 +156,17 @@ header .status,
     opacity: 0;
     pointer-events: none;
 }
+
+/* tablets: 6 frames per row */
+@media (max-width: 1024px) {
+    :root {
+        --cols: 6;
+    }
+}
+
+/* phones: 3 frames per row */
+@media (max-width: 600px) {
+    :root {
+        --cols: 3;
+    }
+}
